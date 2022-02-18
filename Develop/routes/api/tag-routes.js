@@ -64,13 +64,13 @@ router.put('/:id',async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete on tag by its `id` value
   try {
-    const userData = await Tag.destroy(req.body, {
+    const userData = await Tag.destroy({
       where: {
         id: req.params.id,
       },
       individualHooks: true
-    });
-    if (!userData[0]) {
+    })
+    if (!userData) {
       res.status(404).json({ message: 'No category with this id!' });
       return;
     }
