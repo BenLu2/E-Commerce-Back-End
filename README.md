@@ -39,7 +39,7 @@ Once the data is seeded, you can run 'node server.js' to start the server, then 
 ## Demo Video
 
 
-[![Watch the video](https://img.youtube.com/vi/Y7HPIujPvjo/maxresdefault.jpg)](https://youtu.be/Y7HPIujPvjo)
+[![Watch the video](https://img.youtube.com/vi/tMLScCHLedo/maxresdefault.jpg)](https://youtu.be/tMLScCHLedo)
 
 <!-- CONTACT -->
 ## Contact
