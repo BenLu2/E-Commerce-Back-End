@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
   try {
-    const userData = await Tag.findByPk(req.params.id, {include: [{ model: Product }],});
+    const userData = await Tag.findByPk(req.params.id, {include: [{ model: Product}],});
     if (!userData) {
       res.status(404).json({ message: 'No tag with this id!' });
       return;
@@ -78,7 +78,6 @@ router.delete('/:id', (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-
 });
 
 module.exports = router;

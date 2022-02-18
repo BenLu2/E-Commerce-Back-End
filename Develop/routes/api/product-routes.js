@@ -2,15 +2,14 @@ const router = require('express').Router();
 const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
-
 // get all products
 router.get('/', (req, res) => {
   // find all products
-  // be sure to include its associated Category and Tag data
+  // Included its associated Category and Tag data
   try {
     const readerData = await Product.findAll({
-      //include Product model 
-      include: [{ model: Category,Tag }],
+      //include Category and Tag model 
+      include: [{ model: Category },{ model:Tag }],
     });
     res.status(200).json(readerData);
   } catch (err) {
@@ -21,9 +20,9 @@ router.get('/', (req, res) => {
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+  // Included its associated Category and Tag data
   try {
-    const userData = await Product.findByPk(req.params.id, {include: [{ model: Category,Tag }],});
+    const userData = await Product.findByPk(req.params.id, {include: [{ model: Category },{ model:Tag }],});
     if (!userData) {
       res.status(404).json({ message: 'No category with this id!' });
       return;
@@ -66,7 +65,7 @@ router.post('/', (req, res) => {
     });
 });
 
-// update product
+// update product by id
 router.put('/:id', (req, res) => {
   // update product data
   Product.update(req.body, {
@@ -110,6 +109,21 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  try {
+    const userData = await Product.delete(req.body, {
+      where: {
+        id: req.params.id,
+      },
+      individualHooks: true
+    });
+    if (!userData[0]) {
+      res.status(404).json({ message: 'No category with this id!' });
+      return;
+    }
+    res.status(200).json(userData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

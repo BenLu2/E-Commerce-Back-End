@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   try {
     const readerData = await Category.findAll({
       //include Product model 
-      include: [{ model: Product }],
+      include: [{ model: Product}],
     });
     res.status(200).json(readerData);
   } catch (err) {
@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
   // find one category by its `id` value
   // Included its associated Products
   try {
-    const userData = await Category.findByPk(req.params.id, {include: [{ model: Product }],});
+    const userData = await Category.findByPk(req.params.id, {include: [{ model: Product}],});
     if (!userData) {
       res.status(404).json({ message: 'No category with this id!' });
       return;
@@ -44,7 +44,6 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
-
     try {
       const userData = await Category.update(req.body, {
         where: {
